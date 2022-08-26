@@ -1,0 +1,24 @@
+<div class="container">
+  <app-cockpit
+   (serverCreated)="onServerAdded($event)"
+   (blueprintCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+  <hr>
+  <div class="row">
+    <div class="col-xs-12">
+      <button class="btn btn-primary" (click)="onChangeFirst()">Change first Element</button>
+      <button class="btn btn-danger" (click)="onDestroyFirst()">Destroy first Component</button>
+      <app-server-element
+       *ngFor="let serverElement of serverElements"
+        [element]="serverElement"
+        [name]="serverElement.name">
+        <p #contentParagraph>
+          <strong *ngIf="serverElement.type === 'server';else empah" style="color: red" empah>{{ serverElement.content }}</strong>
+          <ng-template #empah>
+            <em>{{ serverElement.content }}</em>
+          </ng-template>
+        </p>
+      </app-server-element>
+    </div>
+  </div>
+</div>
